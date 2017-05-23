@@ -21,7 +21,9 @@ public class RecyclerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler);
         dataSet = new ArrayList<>();
-        initDataset();
+        dataSet.add(new Model(R.mipmap.ic_launcher,"Iten 1", "Sub Item 1"));
+        dataSet.add(new Model(R.mipmap.ic_launcher,"Iten 2", "Sub Item 3"));
+        dataSet.add(new Model(R.mipmap.ic_launcher,"Iten 2", "Sub Item 3"));
 
         rvView = (RecyclerView) findViewById(R.id.rv_main);
         rvView.setHasFixedSize(true);
@@ -56,13 +58,5 @@ public class RecyclerActivity extends AppCompatActivity {
 
     }
 
-    private void initDataset(){
 
-
-        dataSet.add(new Model(R.mipmap.ic_launcher,"Iten 1", "Sub Item 1"));
-        dataSet.add(new Model(R.mipmap.ic_launcher,"Iten 2", "Sub Item 3"));
-        dataSet.add(new Model(R.mipmap.ic_launcher,"Iten 2", "Sub Item 3"));
-
-
-    }
 }
