@@ -17,9 +17,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public RecyclerViewAdapter(ArrayList<Model> inputData) {
         rvData = inputData;
     }
-
-
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -40,24 +37,28 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return rvData.size();
     }
 
-    public void setOnItemClickListener(ClickListener clickListener) {
-        RecyclerViewAdapter.clickListener = clickListener;
-    }
+    public interface ClickListener{
 
-    public interface ClickListener {
         void onItemClick(int position, View v);
-        void onItemLongClick(int position, View v);
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
+    public void setOnItemClickListener(ClickListener clickListener){
+        RecyclerViewAdapter.clickListener = clickListener;
+
+    }
+
+
+
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView tvTitle;
         public TextView tvSubtitle;
 
         public ViewHolder(View v) {
             super(v);
-
             v.setOnClickListener(this);
-            v.setOnLongClickListener(this);
+
+
 
             tvTitle = (TextView) v.findViewById(R.id.tv_title);
             tvSubtitle = (TextView) v.findViewById(R.id.tv_subtitle);
@@ -66,12 +67,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         @Override
         public void onClick(View v) {
             clickListener.onItemClick(getAdapterPosition(), v);
-        }
-
-        @Override
-        public boolean onLongClick(View v) {
-            clickListener.onItemLongClick(getAdapterPosition(), v);
-            return false;
         }
     }
 }

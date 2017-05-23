@@ -1,5 +1,6 @@
 package beginner.iak.com.simplelistview;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,10 +21,12 @@ public class RecyclerActivity extends AppCompatActivity {
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler);
+
+
         dataSet = new ArrayList<>();
-        dataSet.add(new Model(R.mipmap.ic_launcher,"Iten 1", "Sub Item 1"));
-        dataSet.add(new Model(R.mipmap.ic_launcher,"Iten 2", "Sub Item 3"));
-        dataSet.add(new Model(R.mipmap.ic_launcher,"Iten 2", "Sub Item 3"));
+        dataSet.add(new Model(R.mipmap.ic_launcher,"Item 1", "Sub Item 1"));
+        dataSet.add(new Model(R.mipmap.ic_launcher_round,"Item 2", "Sub Item 2"));
+        dataSet.add(new Model(R.mipmap.ic_launcher,"Item 3", "Sub Item 3"));
 
         rvView = (RecyclerView) findViewById(R.id.rv_main);
         rvView.setHasFixedSize(true);
@@ -34,21 +37,23 @@ public class RecyclerActivity extends AppCompatActivity {
         adapter = new RecyclerViewAdapter(dataSet);
         rvView.setAdapter(adapter);
 
-
-
         adapter.setOnItemClickListener(new RecyclerViewAdapter.ClickListener() {
             @Override
             public void onItemClick(int position, View v) {
-                Toast.makeText(RecyclerActivity.this,dataSet.get(position).title,Toast.LENGTH_SHORT).show();
-                Toast.makeText(RecyclerActivity.this,String.valueOf(adapter.getItemCount()),Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onItemLongClick(int position, View v) {
-                Toast.makeText(RecyclerActivity.this,dataSet.get(position)+" Long",Toast.LENGTH_SHORT).show();
-
+                Model model = dataSet.get(position);
+                Intent toTarget = new Intent(RecyclerActivity.this, TargetActivity.class);
+                toTarget.putExtra("icon",model.icon);
+                toTarget.putExtra("title",model.title);
+                toTarget.putExtra("sub",model.sub);
+                startActivity(toTarget);
             }
         });
+
+
+
+
+
+
 
 
 

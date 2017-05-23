@@ -59,6 +59,8 @@ public class CustomListActivity extends AppCompatActivity {
         });
 
 
+
+
         btnAdd = (Button) findViewById(R.id.btnAdd);
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
