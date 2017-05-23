@@ -1,0 +1,68 @@
+package beginner.iak.com.simplelistview;
+
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+
+public class RecyclerActivity extends AppCompatActivity {
+
+    private RecyclerView rvView;
+    private RecyclerViewAdapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private ArrayList<Model> dataSet;
+
+    @Override
+    protected void onCreate( Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_recycler);
+        dataSet = new ArrayList<>();
+        initDataset();
+
+        rvView = (RecyclerView) findViewById(R.id.rv_main);
+        rvView.setHasFixedSize(true);
+
+        layoutManager = new LinearLayoutManager(this);
+        rvView.setLayoutManager(layoutManager);
+
+        adapter = new RecyclerViewAdapter(dataSet);
+        rvView.setAdapter(adapter);
+
+
+
+        adapter.setOnItemClickListener(new RecyclerViewAdapter.ClickListener() {
+            @Override
+            public void onItemClick(int position, View v) {
+                Toast.makeText(RecyclerActivity.this,dataSet.get(position).title,Toast.LENGTH_SHORT).show();
+                Toast.makeText(RecyclerActivity.this,String.valueOf(adapter.getItemCount()),Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onItemLongClick(int position, View v) {
+                Toast.makeText(RecyclerActivity.this,dataSet.get(position)+" Long",Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
+
+
+
+
+
+    }
+
+    private void initDataset(){
+
+
+        dataSet.add(new Model(R.mipmap.ic_launcher,"Iten 1", "Sub Item 1"));
+        dataSet.add(new Model(R.mipmap.ic_launcher,"Iten 2", "Sub Item 3"));
+        dataSet.add(new Model(R.mipmap.ic_launcher,"Iten 2", "Sub Item 3"));
+
+
+    }
+}
