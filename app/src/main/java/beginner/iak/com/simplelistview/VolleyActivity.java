@@ -53,13 +53,14 @@ public class VolleyActivity extends AppCompatActivity {
         getDataFromAPI();
     }
 
-    /**
-     * Created by SasserNetsky on 5/25/17.
-     */
+
 
     public void getDataFromAPI(){
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
+        /**
+         * coba ganti dengan url http://note.bali-besttour.com/api.php/users?transform=1 dan tampikan field name dan email
+         */
         final String url = "http://note.bali-besttour.com/api.php/notes?transform=1";
 
         Response.Listener<String> responseListener = new Response.Listener<String>() {

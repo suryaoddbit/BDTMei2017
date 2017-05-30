@@ -1,8 +1,6 @@
 package beginner.iak.com.simplelistview.model;
 
-/**
- * Created by SasserNetsky on 5/25/17.
- */
+
 
 public class Note {
     private  String id;

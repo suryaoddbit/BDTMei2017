@@ -2,9 +2,7 @@ package beginner.iak.com.simplelistview.model;
 
 import java.util.List;
 
-/**
- * Created by SasserNetsky on 5/25/17.
- */
+
 
 public class APIResponse {
 

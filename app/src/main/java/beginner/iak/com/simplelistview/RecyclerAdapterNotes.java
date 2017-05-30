@@ -11,9 +11,7 @@ import java.util.ArrayList;
 import beginner.iak.com.simplelistview.model.Note;
 
 
-/**
- * Created by SasserNetsky on 5/25/17.
- */
+
 
 public class RecyclerAdapterNotes extends RecyclerView.Adapter<RecyclerAdapterNotes.ViewHolder> {
     private static ClickListener clickListener;
