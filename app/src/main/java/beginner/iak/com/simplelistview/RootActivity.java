@@ -30,5 +30,14 @@ public class RootActivity extends AppCompatActivity {
                 startActivity(toRecycler);
             }
         });
+
+        Button btnVolley = (Button) findViewById(R.id.btnVolley);
+        btnVolley.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent toRecycler = new Intent(RootActivity.this, VolleyActivity.class);
+                startActivity(toRecycler);
+            }
+        });
     }
 }

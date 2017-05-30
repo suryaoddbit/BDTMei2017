@@ -11,11 +11,22 @@
         android:id="@+id/btnCustomList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Custom List Adapter"/>
+        android:text="Custom List Adapter"
+        android:textStyle="bold"
+        android:textSize="30dp"/>
     <Button
         android:id="@+id/btnRecycleAdapter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Recycle List Adapter"/>
+        android:text="Recycle List Adapter"
+        android:textStyle="bold"
+        android:textSize="30dp"/>
+    <Button
+        android:id="@+id/btnVolley"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Volley"
+        android:textStyle="bold"
+        android:textSize="30dp"/>
 
 </LinearLayout>
