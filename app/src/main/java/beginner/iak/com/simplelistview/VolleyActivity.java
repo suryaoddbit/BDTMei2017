@@ -4,7 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -18,17 +20,25 @@ import java.util.ArrayList;
 
 import beginner.iak.com.simplelistview.model.Note;
 import beginner.iak.com.simplelistview.model.APIResponse;
+import beginner.iak.com.simplelistview.model.User;
+import beginner.iak.com.simplelistview.model.UsersResponse;
 
 public class VolleyActivity extends AppCompatActivity {
     private RecyclerView rvView;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<APIResponse> dataSet = new ArrayList<>();
-    private RecyclerAdapterNotes adapter;
+    private RecyclerAdapterNotes noteAdapter;
+
+    private UsersAdapter usersAdapter;
 
     private APIResponse notesResponse;
     private Gson gson = new Gson();
 
     private ArrayList<Note> listNotes = new ArrayList<>();
+    private ArrayList<User> listUser = new ArrayList<>();
+
+    private UsersResponse usersResponse;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,22 +50,25 @@ public class VolleyActivity extends AppCompatActivity {
         rvView.setLayoutManager(layoutManager);
 
         //listNotes = new ArrayList<>();
-        adapter = new RecyclerAdapterNotes(listNotes);
-        rvView.setAdapter(adapter);
+        noteAdapter = new RecyclerAdapterNotes(listNotes);
+        //rvView.setAdapter(noteAdapter);
 
-        adapter.setOnItemClickListener(new RecyclerAdapterNotes.ClickListener() {
+        usersAdapter = new UsersAdapter(listUser);
+        rvView.setAdapter(usersAdapter);
+
+        noteAdapter.setOnItemClickListener(new RecyclerAdapterNotes.ClickListener() {
             @Override
             public void onItemClick(int position, View v) {
 
             }
         });
 
-        getDataFromAPI();
+        //getNoteFromAPI();
+        getUsersFromAPI();
     }
 
-
-
-    public void getDataFromAPI(){
+    // untuk mengambil data note
+    public void getNoteFromAPI(){
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         /**
@@ -71,7 +84,7 @@ public class VolleyActivity extends AppCompatActivity {
 
                     listNotes.add(note);
                 }
-                adapter.notifyDataSetChanged();
+                noteAdapter.notifyDataSetChanged();
             }
         };
 
@@ -93,5 +106,41 @@ public class VolleyActivity extends AppCompatActivity {
         requestQueue.add(request);
     }
 
+    // untuk mendapatkan data users dari api
+    public void getUsersFromAPI(){
+
+        RequestQueue resRequestQueue = Volley.newRequestQueue(this);
+
+        final String urlUsers = "http://note.bali-besttour.com/api.php/users?transform=1";
+
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                usersResponse = gson.fromJson(response, UsersResponse.class);
+
+                for (User user : usersResponse.getUsers()){
+                    listUser.add(user);
+                }
+                usersAdapter.notifyDataSetChanged();
+            }
+        };
+
+        Response.ErrorListener errorListener = new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("VolleyActivity", "onErrorResponse: " + error.getMessage());
+            }
+        };
+
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.GET,
+                urlUsers,
+                responseListener,
+                errorListener
+        );
+
+        resRequestQueue.add(stringRequest);
+
+    }
 
 }

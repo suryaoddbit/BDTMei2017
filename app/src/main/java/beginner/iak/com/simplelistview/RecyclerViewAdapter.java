@@ -60,8 +60,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
 
 
-            tvTitle = (TextView) v.findViewById(R.id.tv_title);
-            tvSubtitle = (TextView) v.findViewById(R.id.tv_subtitle);
+            tvTitle = (TextView) v.findViewById(R.id.tv_subtitle);
+            tvSubtitle = (TextView) v.findViewById(R.id.tv_title);
         }
 
         @Override
